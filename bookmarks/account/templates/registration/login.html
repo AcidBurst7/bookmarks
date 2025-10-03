@@ -17,7 +17,12 @@
         <p><input type="submit" value="Войти"></p>
     </form>
     <p>
-        <a href="{% url 'password_reset' %}">Забыли пароль?
+        <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+    </p>
+    <p>
+        Если у Вас нет аккаунта, 
+        то регистрация 
+        <a href="{% url 'register' %}">здесь</a>
     </p>
 </div>
 {% endblock %}
