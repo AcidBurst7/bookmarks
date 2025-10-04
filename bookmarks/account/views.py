@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -89,6 +90,9 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            messages.success(request, "Профиль успешно обновлен.")
+        else:
+            messages.error(request, "Ошибка при обновлении профиля.")
         return render(
                 request, 
                 'account/dashboard.html',
