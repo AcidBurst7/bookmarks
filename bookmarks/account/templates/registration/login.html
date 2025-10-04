@@ -16,6 +16,15 @@
         <input type="hidden" name="next" value="{{ next }}">
         <p><input type="submit" value="Войти"></p>
     </form>
+    <div id="social">
+        <ul>
+            <li class="google">
+                <a href="{% url "social:begin" "google-oauth2" %}">
+                    Sign In with Google
+                </a>
+            </li>
+        </ul>
+    </div>
     <p>
         <a href="{% url 'password_reset' %}">Забыли пароль?</a>
     </p>

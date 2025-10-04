@@ -9,5 +9,14 @@
     {{ form.as_p }}
     {% csrf_token %}
     <p><input type="submit" value="Войти"></p>
+    <div id="social">
+        <ul>
+            <li class="google">
+                <a href="{% url 'social:begin' 'google-oauth2' %}">
+                    Sign In with Google
+                </a>
+            </li>
+        </ul>
+    </div>
 </form>
 {% endblock %}
