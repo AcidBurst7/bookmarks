@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     'social_django',
     'django_extensions',
+
+    'images.apps.ImagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
+    # 'account.authentication.EmailAuthBackend',
     'social_core.backends.google.GoogleOAuth2',
 ]
 
@@ -141,6 +143,8 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
+# SOCIAL_AUTH_REQUIRE_POST = True
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST=config('EMAIL_HOST')
 EMAIL_HOST_USER=config('EMAIL_HOST_USER')
@@ -152,10 +156,13 @@ DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=config('GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=config('GOOGLE_OAUTH2_SECRET')
+
 SESSION_COOKIE_SAMESITE = None
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True   # если используешь HTTPS
+CSRF_COOKIE_SECURE = True      # тоже, если HTTPS
+
 SOCIAL_AUTH_PIPELINE = [
-    'social_core.pipeline.social_auth.social_defaults',
+    'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
