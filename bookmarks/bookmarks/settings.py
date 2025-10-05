@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bookmarks.urls'
@@ -67,9 +68,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
+    
 ]
 
 WSGI_APPLICATION = 'bookmarks.wsgi.application'
@@ -148,7 +152,8 @@ DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=config('GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=config('GOOGLE_OAUTH2_SECRET')
-
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = False
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_defaults',
     'social_core.pipeline.social_auth.social_uid',

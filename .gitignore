@@ -47,3 +47,7 @@ Thumbs.db
 # Other
 *.env
 .env.*
+
+
+cert.crt
+cert.key
