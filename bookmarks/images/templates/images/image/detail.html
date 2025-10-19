@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ image.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ image.title }}</h1>
+
+{% load thumbnail %}
+<a href="{{ image.image.url }}">
+    <img src="{% thumbnail image.image 300x0 %}" class="image-detail">
+</a>
+
+{% with total_ikes=images.users_like.count %}
+<div class="image-info">
+    <div>
+        <span class="count">
+            Понравилось: {{ total_ikes }}
+        </span>
+    </div>
+    {{ image.description|linebreaks }}
+</div>
+<div class="images-likes">
+    {% for user in image.users_like.all %}
+        <div>
+            {% if user.profile.photo %}
+                <img src="{{ user.profile.photo.url }}" alt="">
+            {% endif %}
+            <p>{{ user.first_name }}</p>
+        </div>
+    {% empty %}
+        Еще никто не оценил эту картинку.
+    {% endfor %}
+</div>
+{% endwith %}
+{% endblock %}
