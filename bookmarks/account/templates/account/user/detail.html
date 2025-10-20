@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}{{ user.get_full_name }}{% endblock %}
+{% block content %}
+    <h1>{{ user.get_full_name }}</h1>
+    <div class="profile-info">
+        <img src="{% thumbnail user.profile.photo 180x180 %}" class="user-detail">
+    </div>
+    {% with total_followers=user.followers.count %}
+        <span class="count">
+            <span class="total">
+                {% if total_followers > 0 %}
+                    Подписчиов: {{ total_followers }}
+                {% else %}
+                    Нет подписчиков
+                {% endif %}
+            </span>
+        </span>
+        <a href="#"
+           data-id="{{ user.id }}"
+           data-action="{% if request.user in user.followers.all %}un{% endif %}follow"
+           class="follow button">
+            {% if request.user not in user.followers.all %}
+                Подписаться
+            {% else %}
+                Отписаться
+            {% endif %}
+        </a>
+        <div id="image-list" class="image-container">
+            {% include "images/image/template/list_images.html" with images=user.images_created.all %}
+        </div>
+    {% endwith %}
+{% endblock %}
