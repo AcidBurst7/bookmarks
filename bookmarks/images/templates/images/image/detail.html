@@ -14,8 +14,9 @@
 <div class="image-info">
     <div>
         <span class="count">
+            Понравилось: 
             <span class="total">
-                Понравилось: {{ total_likes }}
+                {{ total_likes }}
             </span>
         </span>
         <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like-button">
@@ -50,7 +51,7 @@ var options = {
     headers: {'X-CSRFToken': csrftoken},
     mode: 'same-origin'
 }
-document.querySelector('a.like').addEventListener('click', function(e){
+document.querySelector('a.like-button').addEventListener('click', function(e){
     e.preventDefault();
     var likeButton = this;
 
@@ -71,12 +72,12 @@ document.querySelector('a.like').addEventListener('click', function(e){
             // переключить текст кнопки и атрибут data-action
             var action = previousAction === 'like' ? 'unlike' : 'like';
             likeButton.dataset.action = action;
-            likeButton.innerHTML = action;
+            likeButton.innerHTML = action === 'like' ? 'Нравится' : 'Не нравится';
             
             // обновить количество лайков
             var likeCount = document.querySelector('span.count .total');
             var totalLikes = parseInt(likeCount.innerHTML);
-            likeCount.innerHTML = previousAction === 'like' ? totalLikes + 1 : totalLikes – 1;
+            likeCount.innerHTML = previousAction === 'like' ? totalLikes + 1 : totalLikes - 1;
         }
     });
 });

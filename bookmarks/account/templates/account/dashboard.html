@@ -24,4 +24,13 @@
     или 
     <a href="{% url 'password_change' %}">изменить пароль</a>.
 </p>
+
+<h2>Последние события</h2>
+<div id="action-list">
+    {% for action in actions %}
+        {% include "actions/action/detail.html" %}
+    {% empty %}
+        <p>Еще пока ничего не произошло</p>
+    {% endfor %}
+</div>
 {% endblock %}
