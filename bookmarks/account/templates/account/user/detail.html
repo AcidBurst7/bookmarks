@@ -8,19 +8,10 @@
     </div>
     {% with total_followers=user.followers.count %}
         <span class="count">
-            {% if total_followers > 0 %}
-                Подписчиков:
-            {% else %}
-                Нет подписчиков
-            {% endif %}
-            <span class="total">
-                {{ total_followers }}
-            </span>
+            Подписчиков: <span class="total">{{ total_followers }}</span>
         </span>
-        <a href="#"
-           data-id="{{ user.id }}"
-           data-action="{% if request.user in user.followers.all %}un{% endif %}follow"
-           class="follow button">
+        <a href="#" data-id="{{ user.id }}" class="follow button"
+           data-action="{% if request.user in user.followers.all %}un{% endif %}follow">
             {% if request.user not in user.followers.all %}
                 Подписаться
             {% else %}
