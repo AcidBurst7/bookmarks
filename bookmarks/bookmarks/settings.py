@@ -166,9 +166,9 @@ SESSION_COOKIE_SAMESITE = None
 SESSION_COOKIE_SECURE = True   # если используешь HTTPS
 CSRF_COOKIE_SECURE = True      # тоже, если HTTPS
 
-REDIS_HOST=config('REDIST_HOST')
-REDIS_PORT=config('REDIST_PORT')
-REDIS_DB=config('REDIST_DB')
+REDIS_HOST=config('REDIS_HOST')
+REDIS_PORT=config('REDIS_PORT')
+REDIS_DB=config('REDIS_DB')
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
